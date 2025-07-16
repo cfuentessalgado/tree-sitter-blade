@@ -11,8 +11,10 @@
     (start_tag
       (tag_name)
       (attribute
-        (directive)
-        (parameter))
+        (class_directive
+          (directive)
+          (php_expression_parameter
+            (php_expression_content))))
       (attribute
         (attribute_name)
         (quoted_attribute_value
@@ -150,8 +152,10 @@
     (start_tag
       (tag_name)
       (attribute
-        (directive)
-        (parameter)))
+        (class_directive
+          (directive)
+          (php_expression_parameter
+            (php_expression_content)))))
     (end_tag
       (tag_name))))
 
@@ -172,8 +176,10 @@
     (start_tag
       (tag_name)
       (attribute
-        (directive)
-        (parameter)))
+        (class_directive
+          (directive)
+          (php_expression_parameter
+            (php_expression_content)))))
     (end_tag
       (tag_name))))
 
@@ -193,7 +199,9 @@
     (start_tag
       (tag_name)
       (attribute
-        (directive)
-        (parameter)))
+        (class_directive
+          (directive)
+          (php_expression_parameter
+            (php_expression_content)))))
     (end_tag
       (tag_name))))

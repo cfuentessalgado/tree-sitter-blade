@@ -7,6 +7,10 @@
     (#set! injection.include-children)
     (#set! injection.language "php_only"))
 
+((php_expression_content) @injection.content
+    (#set! injection.include-children)
+    (#set! injection.language "php_only"))
+
 ((text) @injection.content
     (#has-ancestor? @injection.content "envoy")
     (#set! injection.combined)

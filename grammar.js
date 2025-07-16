@@ -354,21 +354,33 @@ var grammar_default = grammar(import_grammar.default, {
       )
     ),
     // ! Conditional Blade Attribute Directives
-    _blade_attribute: ($) => seq(
-      alias(
-        choice(
-          "@class",
-          "@style",
-          "@checked",
-          "@selected",
-          "@disabled",
-          "@readonly",
-          "@required"
+    _blade_attribute: ($) => choice(
+      $.class_directive,
+      seq(
+        alias(
+          choice(
+            "@style",
+            "@checked",
+            "@selected",
+            "@disabled",
+            "@readonly",
+            "@required"
+          ),
+          $.directive
         ),
-        $.directive
-      ),
-      $._directive_parameter
+        $._directive_parameter
+      )
     ),
+    class_directive: ($) => seq(
+      alias("@class", $.directive),
+      $.php_expression_parameter
+    ),
+    php_expression_parameter: ($) => seq(
+      "(",
+      $.php_expression_content,
+      ")"
+    ),
+    php_expression_content: (_) => token(/([^()]|\([^)]*\))*/),
     // !inline directives
     _inline_directive: ($) => seq(
       alias(

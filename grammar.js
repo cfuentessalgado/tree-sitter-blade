@@ -380,7 +380,10 @@ var grammar_default = grammar(import_grammar.default, {
       $.php_expression_content,
       ")"
     ),
-    php_expression_content: (_) => token(/([^()]|\([^)]*\))*/),
+    php_expression_content: (_) => token(prec(-1, repeat(choice(
+      /[^()]+/,
+      seq("(", optional(/[^)]*/), ")")
+    )))),
     
     // ! Conditional directives with PHP expression parameters
     if_directive: ($) => seq(

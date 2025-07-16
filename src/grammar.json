@@ -972,6 +972,162 @@
         "value": "([^()]|\\([^)]*\\))*"
       }
     },
+    "if_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@if"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "php_expression_parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_conditonal_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endif"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "unless_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@unless"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "php_expression_parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_conditonal_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endunless"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "isset_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@isset"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "php_expression_parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_conditonal_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endisset"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "empty_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@empty"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "php_expression_parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_conditonal_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endempty"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
     "_inline_directive": {
       "type": "SEQ",
       "members": [
@@ -2058,19 +2214,19 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_if"
+          "name": "if_directive"
         },
         {
           "type": "SYMBOL",
-          "name": "_unless"
+          "name": "unless_directive"
         },
         {
           "type": "SYMBOL",
-          "name": "_isset"
+          "name": "isset_directive"
         },
         {
           "type": "SYMBOL",
-          "name": "_empty"
+          "name": "empty_directive"
         },
         {
           "type": "SYMBOL",

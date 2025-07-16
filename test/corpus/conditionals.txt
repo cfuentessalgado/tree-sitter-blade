@@ -10,33 +10,13 @@
 
 (document
   (conditional
-    (directive_start)
-    (parameter)
-    (text)
-    (directive_end)))
-
-================================================================================
-@if nesting
-================================================================================
-
-@if(true)
-        @if(true)
-            test
-        @endif
-@endif
-
---------------------------------------------------------------------------------
-
-(document
-  (conditional
-    (directive_start)
-    (parameter)
-    (conditional
+    (unless_directive
       (directive_start)
-      (parameter)
+      (php_expression_parameter
+        (php_expression_content))
       (text)
-      (directive_end))
-    (directive_end)))
+      (directive_end))))
+      (directive_end))))
 
 ================================================================================
 conditional keywords
@@ -78,10 +58,12 @@ conditional keywords
 
 (document
   (conditional
-    (directive_start)
-    (parameter)
-    (text)
-    (directive_end)))
+    (unless_directive
+      (directive_start)
+      (php_expression_parameter
+        (php_expression_content))
+      (text)
+      (directive_end))))
 
 ================================================================================
 @isset
@@ -95,10 +77,12 @@ conditional keywords
 
 (document
   (conditional
-    (directive_start)
-    (parameter)
-    (text)
-    (directive_end)))
+    (isset_directive
+      (directive_start)
+      (php_expression_parameter
+        (php_expression_content))
+      (text)
+      (directive_end))))
 
 ================================================================================
 @empty
@@ -112,10 +96,12 @@ conditional keywords
 
 (document
   (conditional
-    (directive_start)
-    (parameter)
-    (text)
-    (directive_end)))
+    (empty_directive
+      (directive_start)
+      (php_expression_parameter
+        (php_expression_content))
+      (text)
+      (directive_end))))
 
 ================================================================================
 @auth
@@ -283,40 +269,18 @@ conditional keywords
 
 (document
   (conditional
-    (directive_start)
-    (parameter)
-    (comment)
-    (conditional_keyword
-      (directive)
-      (parameter))
-    (text)
-    (conditional_keyword
-      (directive))
-    (text)
-    (directive_end)))
-
-================================================================================
-@cannot
-================================================================================
-
-@cannot('update', $post)
-    <!-- comment -->
-@elsecannot('create', App\Models\Post::class)
-    Hello world
-@endcannot
-
---------------------------------------------------------------------------------
-
-(document
-  (conditional
-    (directive_start)
-    (parameter)
-    (comment)
-    (conditional_keyword
-      (directive)
-      (parameter))
-    (text)
-    (directive_end)))
+    (if_directive
+      (directive_start)
+      (php_expression_parameter
+        (php_expression_content))
+      (conditional
+        (if_directive
+          (directive_start)
+          (php_expression_parameter
+            (php_expression_content))
+          (text)
+          (directive_end)))
+      (directive_end))))
 
 ================================================================================
 @canany

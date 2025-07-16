@@ -381,6 +381,33 @@ var grammar_default = grammar(import_grammar.default, {
       ")"
     ),
     php_expression_content: (_) => token(/([^()]|\([^)]*\))*/),
+    
+    // ! Conditional directives with PHP expression parameters
+    if_directive: ($) => seq(
+      alias("@if", $.directive_start),
+      $.php_expression_parameter,
+      optional($._conditonal_body),
+      alias("@endif", $.directive_end)
+    ),
+    unless_directive: ($) => seq(
+      alias("@unless", $.directive_start),
+      $.php_expression_parameter,
+      optional($._conditonal_body),
+      alias("@endunless", $.directive_end)
+    ),
+    isset_directive: ($) => seq(
+      alias("@isset", $.directive_start),
+      $.php_expression_parameter,
+      optional($._conditonal_body),
+      alias("@endisset", $.directive_end)
+    ),
+    empty_directive: ($) => seq(
+      alias("@empty", $.directive_start),
+      $.php_expression_parameter,
+      optional($._conditonal_body),
+      alias("@endempty", $.directive_end)
+    ),
+    
     // !inline directives
     _inline_directive: ($) => seq(
       alias(
@@ -619,10 +646,10 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // !Conditionals
     conditional: ($) => choice(
-      $._if,
-      $._unless,
-      $._isset,
-      $._empty,
+      $.if_directive,
+      $.unless_directive,
+      $.isset_directive,
+      $.empty_directive,
       $._auth,
       $._guest,
       $._production,

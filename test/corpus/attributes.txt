@@ -131,3 +131,69 @@
         (parameter)))
     (end_tag
       (tag_name))))
+
+================================================================================
+@class with complex array
+================================================================================
+
+<div @class([
+    'text-rose-400 bg-rose-400/10' => $table->latestDump?->isError(),
+    'text-green-400 bg-green-400/10' => $table->latestDump?->isSuccess(),
+    'flex-none',
+    'rounded-full'
+])></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive)
+        (parameter)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+@class with nested arrays
+================================================================================
+
+<div @class([
+    'base-class',
+    $condition ? ['conditional-class'] : [],
+    'another-class'
+])></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive)
+        (parameter)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+@class with method chaining
+================================================================================
+
+<div @class([
+    'error' => $model->hasErrors(),
+    'success' => $model->isValid(),
+])></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive)
+        (parameter)))
+    (end_tag
+      (tag_name))))

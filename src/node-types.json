@@ -807,6 +807,10 @@
       "required": false,
       "types": [
         {
+          "type": "bracket_content",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         }
@@ -1352,6 +1356,18 @@
   {
     "type": ">",
     "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "bracket_content",
+    "named": true
   },
   {
     "type": "comment",

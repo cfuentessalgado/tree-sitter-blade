@@ -944,8 +944,14 @@ var grammar_default = grammar(import_grammar.default, {
       ")"
     ),
     // !parenthesis balancing - for functions/casts
-    parameter: ($) => choice(/[^()]+/, $._nested_parenthases),
+    parameter: ($) => choice(
+      /[^()\[\]]+/,                   // Simple text (exclude (), [])
+      $._nested_parenthases,          // Existing parentheses handling
+      $._nested_brackets              // NEW: Square bracket handling
+    ),
     _nested_parenthases: ($) => seq("(", repeat($.parameter), ")"),
+    _nested_brackets: ($) => seq("[", $.bracket_content, "]"),
+    bracket_content: (_) => token(prec(-1, /[^\[\]]*(?:\[[^\[\]]*\][^\[\]]*)*/)),
     text: ($) => prec.right(repeat1($._text)),
     // hidden to reduce AST noise in php_only #39
     // It is selectively unhidden for other areas
